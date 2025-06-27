@@ -1,0 +1,175 @@
+// import { ascending } from 'd3-array';
+// import * as d3hierarchy from 'd3-hierarchy';
+// import { select, Selection } from 'd3-selection';
+// import { linkVertical } from 'd3-shape';
+// import { useEffect, useRef, useState } from 'react';
+// import { TreeData } from '../interfaces/TreeData';
+// import { useTreeContext } from '../pages/ProcessTreePage';
+
+// /* Original source: A Brief Guide to TypeScript and D3js Hierarchy and Trees - https://javascript.plainenglish.io/a-brief-guide-to-typescript-and-d3js-hierarchy-and-trees-f9bb45871d88 */
+
+// interface TestProcessTreeProps {
+//     treeData: TreeData
+// }
+
+// function TestProcessTree({ treeData }: TestProcessTreeProps) {
+
+//     const svgRef = useRef<SVGSVGElement | null>(null);
+//     const [node, setNode] = useState<Selection<SVGGElement | null, d3hierarchy.HierarchyPointNode<TreeData>, SVGGElement, unknown>>();
+//     const [link, setLink] = useState<Selection<SVGPathElement | null, d3hierarchy.HierarchyLink<TreeData>, SVGGElement, unknown>>();
+
+//     const [activeID, setActiveID, activeElement, setActiveElement] = useTreeContext();
+
+//     /* Runs once on loading this component */
+//     /* Runs twice when React StrictMode is on */
+//     useEffect(() => {
+//         d3setup(); // Set up the tree graph
+//         updateActiveElement(); // Update the active element once, based on activeID
+//     }, []);
+
+//     useEffect(() => {
+//         updateActiveElement();
+//     }, [activeID])
+
+
+//     function updateActiveElement() {
+//         if (node && link) {
+//             // Find node that should become active
+//             const newActiveNode = node.filter((d) => {
+//                 return d.data.name === activeID
+//             })
+
+//             // Reset properties of all elements
+//             node.classed("active", false);
+//             node.select('circle').attr("fill", "white")
+//             link.style('stroke-width', '2.5')
+//             link.classed("active", false)
+
+//             // Check if active node is found
+//             if (!newActiveNode.empty()) {
+//                 newActiveNode.classed("active", true)
+//                 newActiveNode.select('circle').attr("fill", "gray")
+//             }
+
+//         }
+//     }
+
+//     function d3setup() {
+//         /* From tutorial: */
+
+//         /* Set height and dx of tree */
+//         /* Width and dy are inferred */
+//         const height = 500;
+//         let root = d3hierarchy.hierarchy(treeData); // of type HierarchyNode
+//         const dx = 100;
+//         const dy = height / (root.height + 1);
+
+//         /* Create and sort root layout */
+//         const tree = d3hierarchy.tree<TreeData>().nodeSize([dx, dy]);
+//         root.sort((a, b) => ascending(a.data.name, b.data.name));
+
+//         /* Calculate minimal and maximal observed x value */
+//         let x0 = Infinity;
+//         let x1 = -x0;
+//         tree(root).each((d: d3hierarchy.HierarchyPointNode<TreeData>) => {
+//             if (d.x > x1) x1 = d.x;
+//             if (d.x < x0) x0 = d.x;
+//         });
+
+//         const width = x1 - x0 + dx * 2;
+
+//         /* Select SVG from reference */
+//         /* Set width, height and viewbox of SVG */
+//         const svg = select(svgRef.current)
+//             .attr("width", width)
+//             .attr("height", height)
+//             .attr("viewBox", [x0 - dx, -dy / 3, width, height])
+//             .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;"); // Removed max-width:100%;
+
+//         /* Add links */
+//         const linkSelection = svg.append("g")
+//             .attr("fill", "none")
+//             .attr("stroke", "#555")
+//             .attr("stroke-opacity", 0.4)
+//             .attr("stroke-width", 2.5)
+//             .selectAll()
+//             .data(root.links())
+//             .join("path")
+//             .attr("d", (d) => {
+//                 const linkGenerator =
+//                     linkVertical<d3hierarchy.HierarchyPointLink<TreeData>, [number, number]>()
+//                         .source((d) => [d.source.x, d.source.y])
+//                         .target((d) => [d.target.x, d.target.y]);
+//                 return linkGenerator(d as d3hierarchy.HierarchyPointLink<TreeData>);
+//             });
+//         setLink(linkSelection);
+
+//         /* Add nodes */
+//         const nodeSelection = svg.append("g")
+//             .attr("stroke-linejoin", "round")
+//             .attr("stroke-width", 2)
+//             .selectAll()
+//             .data(tree(root).descendants())
+//             .join("g")
+//             .attr("transform", d => `translate(${d.x},${d.y})`)
+//         setNode(nodeSelection);
+
+//         // Original
+//         // node.append("circle")
+//         //     .attr("fill", d => d.children ? "#555" : "#999")
+//         //     .attr("r", 2.5);
+//         const circles = nodeSelection.append("circle")
+//             .attr("fill", "white")
+//             .attr("stroke", d => d.children ? "#222" : "#AAA")
+//             .attr("r", 15);
+
+//         /* Don't use arrow-function when using this keyword!!! */
+//         // Mouse logic for nodes
+//         nodeSelection.on('mouseenter', function (event, d) {
+//             select(this).select('circle').attr("fill", "gray")
+//         }).on('mouseleave', function (event, d) {
+//             if (!select(this).classed("active")) {
+//                 select(this).select('circle').attr("fill", "white")
+//             }
+//         }).on('click', function (event, d) {
+//             // Check if already active
+//             const isAlreadyActive: boolean = select(this).classed("active");
+
+//             // Reference is still kept to d, prevent extra state behaviour and set white here
+
+//             // Update states
+//             if (!isAlreadyActive) {
+//                 setActiveID(d.data.name)
+//                 setActiveElement("NODE")
+//             } else {
+//                 setActiveID(undefined)
+//                 setActiveElement(undefined)
+//             }
+//         });
+
+//         // Mouse logic for links
+//         linkSelection.on('mouseenter', function (event, d) {
+//             select(this).style('stroke-width', '5')
+//         }).on('mouseleave', function (event, d) {
+//             select(this).style('stroke-width', '2.5')
+//         })
+
+//         /* Add text to nodes */
+//         nodeSelection.append("text")
+//             .attr("dy", "0.31em")
+//             //.attr("x", d => d.children ? -6 : 6) // Original, set x position to left or right depending on children
+//             //.attr("text-anchor", d => d.children ? "end" : "start") // Original, set text anchor to end or start depending on children
+//             .attr("text-anchor", "middle") // Added
+//             .text(d => d.data.name)
+//             .clone(true).lower()
+//             .attr("stroke", "white");
+
+//         // svgRef.current = svg.node()
+//     }
+
+//     return (
+//         <svg ref={svgRef} />
+//     );
+// }
+
+// export default TestProcessTree;

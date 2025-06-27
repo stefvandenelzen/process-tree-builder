@@ -1,0 +1,56 @@
+[
+    {
+        "group1": [
+            "Open file",
+            "Add meter details",
+            "Add customer details",
+            "Close file",
+            "Cancel previous contract"
+        ],
+        "group2": [
+            "Receive application",
+            "pre-check",
+            "Reject contract",
+            "Approve contract",
+            "Start cancellation"
+        ],
+        "type": "sequence",
+        "algorithm": "test"
+    },
+    {
+        "group1": [
+            "Open file"
+        ],
+        "group2": [
+            "Receive application",
+            "pre-check",
+            "Reject contract",
+            "Approve contract",
+            "Start cancellation",
+            "Add meter details",
+            "Add customer details",
+            "Close file",
+            "Cancel previous contract"
+        ],
+        "type": "sequence",
+        "algorithm": "test"
+    },
+    {
+        "group1": [
+            "Receive application",
+            "pre-check",
+            "Reject contract",
+            "Approve contract",
+            "Open file",
+            "Add meter details",
+            "Add customer details",
+            "Close file",
+            "Cancel previous contract"
+        ],
+        "group2": [
+            "Start cancellation"
+        ],
+        "type": "sequence",
+        "algorithm": "test"
+    }
+]

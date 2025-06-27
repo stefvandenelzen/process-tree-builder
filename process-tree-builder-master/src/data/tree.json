@@ -1,0 +1,64 @@
+{
+    "name": "Eve",
+    "value": 15,
+    "children": [
+        {
+            "name": "Cain",
+            "value": 15,
+            "children": [
+                {
+                    "name": "Cain1",
+                    "value": 15
+                },
+                {
+                    "name": "Cain2",
+                    "value": 15
+                }
+            ]
+        },
+        {
+            "name": "Seth",
+            "value": 15,
+            "children": [
+                {
+                    "name": "Child1",
+                    "value": 15
+                },
+                {
+                    "name": "Child2",
+                    "value": 15
+                },
+                {
+                    "name": "Child3",
+                    "value": 15
+                },
+                {
+                    "name": "Child4",
+                    "value": 15
+                },
+                {
+                    "name": "Child5",
+                    "value": 15
+                }
+            ]
+        },
+        {
+            "name": "Abel",
+            "value": 15
+        },
+        {
+            "name": "Awan",
+            "value": 15,
+            "children": [
+                {
+                    "name": "Enoch",
+                    "value": 15
+                }
+            ]
+        },
+        {
+            "name": "Azura",
+            "value": 15
+        }
+    ]
+}

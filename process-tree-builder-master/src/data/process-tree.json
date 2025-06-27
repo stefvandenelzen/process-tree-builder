@@ -1,0 +1,69 @@
+{
+    "id": "root",
+    "type": "sequence",
+    "children": [
+        {
+            "id": "1",
+            "type": "loop",
+            "children": [
+                {
+                    "id": "2",
+                    "type": "activity",
+                    "activity": ""
+                },
+                {
+                    "id": "3",
+                    "type": "activity",
+                    "activity": ""
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "type": "xor",
+            "children": [
+                {
+                    "id": "6",
+                    "type": "activity",
+                    "activity": ""
+                },
+                {
+                    "id": "7",
+                    "type": "activity",
+                    "activity": ""
+                },
+                {
+                    "id": "8",
+                    "type": "activity",
+                    "activity": ""
+                }
+            ]
+        },
+        {
+            "id": "9",
+            "type": "activity",
+            "activity": ""
+        },
+        {
+            "id": "10",
+            "type": "concurrency",
+            "children": [
+                {
+                    "id": "11",
+                    "type": "activity",
+                    "activity": ""
+                },
+                {
+                    "id": "12",
+                    "type": "activity",
+                    "activity": ""
+                }
+            ]
+        },
+        {
+            "id": "13",
+            "type": "activity",
+            "activity": ""
+        }
+    ]
+}

@@ -1,0 +1,449 @@
+/* body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+} */
+
+/* SVG */
+/* svg {
+  display: block;
+} */
+
+:root {
+  /* --navbar-height: 53px; */
+  --navbar-height: 0px;
+  --dark-blue: rgb(36, 64, 88);
+  --light-blue: rgb(53, 78, 100);
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  overflow: hidden;
+  z-index: -1;
+}
+
+div#root {
+  /* width: 100vw; */
+  /* height: 100vh; */
+}
+
+/* Importing page styling */
+div.importing h4 {
+  margin-left: 10px;
+}
+
+div.importing div.loading {
+  margin-left: 10px;
+}
+
+div.traceHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h4.traceHeaderH4 {
+  margin: 5px;
+}
+
+div.traceHeaderInfo {
+  margin: 10px;
+  /* float: left; */
+}
+
+div.traceHeaderButtonContainer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+button.traceHeaderButton {
+  cursor: pointer;
+  margin: 0px;
+  margin-right: 25px;
+  margin-left: 8px;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+div.confirmationContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+div.confirmationButtonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+button.confirm {
+  background-color: rgb(60, 145, 60);
+  border: 2px solid #04aa6d; /* Green */
+  font-size: 10pt;
+  font-weight: bold;
+  color: white;
+}
+
+button.goBack {
+  background-color: rgb(197, 49, 4);
+  border: 2px solid #ff7300;
+  font-size: 10pt;
+  font-weight: bold;
+  color: white;
+}
+
+div.modalHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+div.modalHeaderButtonContainer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+button.modalHeaderButton {
+  cursor: pointer;
+  margin: 0px;
+  margin-right: 5px;
+  margin-left: 8px;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 80px;
+}
+
+div.modalHeaderInfo {
+  flex-grow: 1;
+}
+
+p.modalHeaderP {
+  text-align: center;
+}
+
+/* Algorithm page styling */
+div.algorithm h4 {
+  margin-left: 10px;
+}
+
+button {
+  cursor: pointer;
+  margin: 5px;
+  padding: 5px;
+}
+
+div.cutHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+h4.cutH4 {
+  margin: 10px;
+  /* float: left; */
+}
+
+div.cutHeaderButtonContainer {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+button.cutHeaderButton {
+  cursor: pointer;
+  margin: 0px;
+  margin-right: 8px;
+  margin-left: 8px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+/* Tooltip Styling */
+
+div.tree_node_tooltip {
+  position: absolute;
+  visibility: hidden;
+  color: white;
+  background-color: var(--light-blue);
+  padding: 5px;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+h4.tree_node_tooltip {
+  margin: 0px;
+}
+
+div.tree_edge_tooltip {
+  position: absolute;
+  visibility: hidden;
+  color: white;
+  background-color: var(--light-blue);
+  padding: 5px;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+h4.tree_edge_tooltip {
+  margin: 0px;
+}
+
+div.dfg_node_tooltip {
+  position: absolute;
+  visibility: hidden;
+  color: white;
+  background-color: var(--light-blue);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+h4.dfg_node_tooltip {
+  margin: 0px;
+}
+
+div.dfg_link_tooltip {
+  position: absolute;
+  visibility: hidden;
+  color: white;
+  background-color: var(--light-blue);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+h4.dfg_link_tooltip {
+  margin: 0px;
+}
+
+div.node-info {
+  position: absolute;
+  background-color: var(--light-blue);
+  /* top: var(--navbar-height); */
+  top: 53px;
+  color: white;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+div.node-info p {
+  margin: 5px;
+}
+
+div.node-info button {
+  cursor: pointer;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+div.legenda {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  /* background-color: var(--light-blue); */
+  /* color: white; */
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+div.legenda p {
+  margin: 5px;
+}
+
+div.automerge {
+  position: absolute;
+  left: 10px;
+  top: calc(10px + 53px);
+  background-color: var(--light-blue);
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+div.automerge:hover {
+  color: rgb(243, 176, 33);
+}
+
+div.generatelayout p {
+  margin: 1px;
+}
+
+div.generatelayout {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  background-color: var(--light-blue);
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+div.generatelayout:hover {
+  color: rgb(243, 176, 33);
+}
+
+div.automerge p {
+  margin: 1px;
+}
+
+/* Homepage styling */
+div.homepage {
+  height: calc(100vh - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+div.homepage div.section {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 25px;
+  border-radius: 25px;
+  background-color: #eeeeee;
+}
+
+div.homepage div.hide {
+  margin-top: 10px;
+}
+
+div.homepage h1 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p.banner {
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  color: white;
+  background-color: var(--light-blue);
+}
+
+p.bannersmall {
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  padding: 4px;
+  color: white;
+  background-color: var(--light-blue);
+}
+
+div.homepage input.textfield {
+  height: 15px;
+  width: 300px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  margin-right: 15px;
+}
+
+div.homepage input.checkbox {
+  padding: 0px;
+}
+
+div.homepage li.todo {
+  margin-top: 15px;
+  display: inline;
+}
+
+div.homepage div.entry {
+  margin: 5px;
+  padding: 5px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+div.homepage ul {
+  padding-inline-start: 0px;
+}
+
+div.homepage button {
+  cursor: pointer;
+  height: 35px;
+  width: 60px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: var(--dark-blue);
+}
+
+div.homepage button.item {
+  cursor: pointer;
+  width: 50px;
+  height: 25px;
+  margin: 5px;
+  display: inline;
+  padding: 5px;
+  font-size: 10px;
+}
+
+/* Navbar */
+nav {
+  background-color: var(--dark-blue);
+  overflow: hidden;
+  color: white;
+  font-size: 18px;
+}
+
+nav a {
+  float: left;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 16px;
+  color: inherit;
+}
+
+nav a:hover,
+a.active {
+  background-color: var(--light-blue);
+}
+
+a.active {
+  font-weight: bold;
+}
+
+nav a:visited {
+  color: inherit;
+}
+
+/** SCROLLBAR **/
+/* width */
+::-webkit-scrollbar {
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
