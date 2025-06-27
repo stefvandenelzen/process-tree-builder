@@ -14,6 +14,10 @@ This prototype was developed as part of the graduation project of [Wouter van de
 
 * Add the following line to the 'package.json': "proxy": "http://127.0.0.1:5000",
 
+* The project can be started with the command: npm start
+
+* The front-end can now be accessed by browsing to: http://localhost:3000
+
 ### Resolving possible issues
 
 * If you encounter issues with the split-pane package, these can be resolved by adding the line 'children?:React.ReactNode;' to the file 'process-tree-builder/node-modules/react-split-pane/index.d.ts' in the SplitPaneProps type on line 7.
